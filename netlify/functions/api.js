@@ -1,7 +1,9 @@
 
 exports.handler = async (event, context) => {
-    if (event.httpMethod === 'POST') {
-      try {
+  if (event.httpMethod === 'POST') {
+      try {   
+        const dotenv = require("dotenv")
+dotenv.config()
         const code = event.queryStringParameters.code;
         const jose = require("jose");
         const moment = require("moment");
@@ -93,10 +95,10 @@ exports.handler = async (event, context) => {
           },
         };
       }
-     }
-    }
     
   
+    }
+  }
   
 
     
