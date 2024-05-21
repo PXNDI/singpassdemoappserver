@@ -1,6 +1,5 @@
 
 exports.handler = async (event, context) => {
-  if (event.httpMethod === 'POST') {
       try {   
         const dotenv = require("dotenv")
 dotenv.config()
@@ -97,7 +96,7 @@ dotenv.config()
       }
     
   
-    }
+    
   }
   
 
