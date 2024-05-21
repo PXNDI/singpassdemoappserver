@@ -28,7 +28,7 @@ dotenv.config();
           })
           .sign(privateKey);
     
-        // console.log(jwt);
+        console.log(jwt);
     
         const url = "https://stg-id.singpass.gov.sg/token";
         const { data } = await axios.post(
