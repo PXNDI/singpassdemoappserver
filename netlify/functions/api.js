@@ -15,7 +15,7 @@ exports.handler = async (event) => {
         const jwt = await new jose.SignJWT({
           sub: process.env.REACT_APP_CLIENT_ID,
           iss: process.env.REACT_APP_CLIENT_ID,
-          aud: process.env.REACT_APP_ENV_TOKENURL,
+          aud: process.env.REACT_APP_JWTTOKENURL,
           iat: nowTime,
           exp: futureTime,
         })
@@ -44,7 +44,7 @@ exports.handler = async (event) => {
             },
           }
         );
-        console.log(data); 
+      
 
         //Enc Keys
        try {
@@ -86,12 +86,10 @@ exports.handler = async (event) => {
           headers: {
             "Content-Type": "application/json",
           }, 
-        };
+        }; 
+
       }
     
   
     
   }
-
-
-    
