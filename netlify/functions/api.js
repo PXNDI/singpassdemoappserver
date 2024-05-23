@@ -82,7 +82,7 @@ exports.handler = async (event) => {
         } 
       } catch (e) {
         if (e.response?.data) {
-          console.error(e.response.data);
+          console.log(e.response.data);
           }
        return {
          statusCode: 500,
