@@ -19,8 +19,7 @@ exports.handler = async (event) => {
     REACT_APP_SPTOKENURL="https://stg-id.singpass.gov.sg/token"
     REACT_APP_KID="testing123"
     REACT_APP_REDIRECT_URI="https://singpassdemoapp.netlify.app/callback"     
-        const code =event.queryStringParameters.code;
-        console.log(code);
+       const code =event.queryStringParameters.code;
         const jose = require("jose");
         const moment = require("moment");
         const axios = require("axios");
@@ -42,7 +41,6 @@ exports.handler = async (event) => {
             typ: "JWT",
           })
           .sign(privateKey);
-       console.log(jwt);
        const url = REACT_APP_SPTOKENURL;
         const { data } = await axios.post(
           url,
@@ -62,8 +60,7 @@ exports.handler = async (event) => {
           }
         );
       
-        console.log(data);
-        //Enc Keys
+        //Enc Keys (only for agency use where profile is direct-pii)
        try {
           const descprivateKey = {
             kty: "EC",
@@ -84,11 +81,11 @@ exports.handler = async (event) => {
           const dto = new TextDecoder().decode(plaintext);
           const result = await jose.decodeJwt(dto);
           const NRIC = result.sub.substring(2, 11);
-          console.log(NRIC);
+          const UUID= result.sub.substring(14);
           //Return NRIC
           return {
             statusCode: 200,
-            body: JSON.stringify({ data: NRIC }),
+            body: JSON.stringify({ data: NRIC , UUID: UUID}),
             headers: {
               "Content-Type": "application/json",
             },
