@@ -1,8 +1,8 @@
 exports.handler = async (event) => {
       try {   
         const dotenv = require("dotenv");
-        dotenv.config();
-        const code ="a_IUu3gI64fNMR73e9hvtDX2otu0pkTesvliKCtSw4o";
+        dotenv.config();        
+        const code =event.queryStringParameters.code;
         const jose = require("jose");
         const moment = require("moment");
         const axios = require("axios");
