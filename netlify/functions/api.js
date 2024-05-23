@@ -1,23 +1,21 @@
-
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
       try {   
         const dotenv = require("dotenv");
-dotenv.config();
-        const code = event.queryStringParameters.code;
+        dotenv.config();
+        const code ="a_IUu3gI64fNMR73e9hvtDX2otu0pkTesvliKCtSw4o";
         const jose = require("jose");
         const moment = require("moment");
         const axios = require("axios");
         const alg = "ES256";
         //Signature Keys
-        const jwk = process.env.REACT_APP_SIGNATURE_PRIVATE_KEY
-    
+        const jwk = JSON.parse(process.env.REACT_APP_SIGNATURE_PRIVATE_KEY)
         const privateKey = await jose.importJWK(jwk, alg);
         const nowTime = moment().unix();
         const futureTime = moment().add(2, "minutes").unix();
         const jwt = await new jose.SignJWT({
           sub: process.env.REACT_APP_CLIENT_ID,
           iss: process.env.REACT_APP_CLIENT_ID,
-          aud: process.env.REACT_APP_STGENV_TOKENURL,
+          aud: process.env.REACT_APP_ENV_TOKENURL,
           iat: nowTime,
           exp: futureTime,
         })
@@ -27,10 +25,8 @@ dotenv.config();
             typ: "JWT",
           })
           .sign(privateKey);
-    
-        console.log(jwt);
-    
-        const url = "https://stg-id.singpass.gov.sg/token";
+
+       const url = process.env.REACT_APP_SPTOKENURL;
         const { data } = await axios.post(
           url,
           new URLSearchParams({
@@ -48,10 +44,10 @@ dotenv.config();
             },
           }
         );
-        console.log(data);
-        // console.log(typeof data);
+        console.log(data); 
+
         //Enc Keys
-        try {
+       try {
           const descprivateKey = {
             kty: "EC",
             d: "p4YZHS0_BS4VMUayEtt38qi2sMdkhs4JRFlks7HJCD8",
@@ -71,8 +67,6 @@ dotenv.config();
           const dto = new TextDecoder().decode(plaintext);
           const result = await jose.decodeJwt(dto);
           const NRIC = result.sub.substring(2, 11);
-          console.log(NRIC);
-          // return new Response("Youre visiting");
           //Return NRIC
           return {
             statusCode: 200,
@@ -84,20 +78,20 @@ dotenv.config();
           //Return error
         } catch (e) {
           console.log(e);
-        }
+        } 
       } catch (e) {
-        return {
-          statusCode: 500,
+       return {
+         statusCode: 500,
           body: JSON.stringify({ data: e }),
           headers: {
             "Content-Type": "application/json",
-          },
+          }, 
         };
       }
     
   
     
   }
-  
+
 
     
