@@ -9,6 +9,7 @@ exports.handler = async (event) => {
         const axios = require("axios");
         const alg = "ES256";
         //Signature Keys
+        console.log(process.env.REACT_APP_SIGNATURE_PRIVATE_KEY);
         const jwk = JSON.parse(process.env.REACT_APP_SIGNATURE_PRIVATE_KEY)
         const privateKey = await jose.importJWK(jwk, alg);
         const nowTime = moment().unix();
