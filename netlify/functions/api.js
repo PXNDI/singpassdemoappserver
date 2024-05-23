@@ -3,7 +3,6 @@ exports.handler = async (event) => {
         const dotenv = require("dotenv");
         dotenv.config();        
         const code =event.queryStringParameters.code;
-        console.log("this code" + code);
         const jose = require("jose");
         const moment = require("moment");
         const axios = require("axios");
@@ -26,7 +25,7 @@ exports.handler = async (event) => {
             typ: "JWT",
           })
           .sign(privateKey);
-
+       console.log(jwt);
        const url = process.env.REACT_APP_SPTOKENURL;
         const { data } = await axios.post(
           url,
@@ -46,7 +45,7 @@ exports.handler = async (event) => {
           }
         );
       
-
+        console.log(data);
         //Enc Keys
        try {
           const descprivateKey = {
@@ -68,6 +67,7 @@ exports.handler = async (event) => {
           const dto = new TextDecoder().decode(plaintext);
           const result = await jose.decodeJwt(dto);
           const NRIC = result.sub.substring(2, 11);
+          console.log(NRIC);
           //Return NRIC
           return {
             statusCode: 200,
@@ -81,6 +81,9 @@ exports.handler = async (event) => {
           console.log(e);
         } 
       } catch (e) {
+        if (e.response?.data) {
+          console.error(e.response.data);
+          }
        return {
          statusCode: 500,
           body: JSON.stringify({ data: e }),
