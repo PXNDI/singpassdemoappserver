@@ -88,6 +88,9 @@ exports.handler = async (event) => {
             body: JSON.stringify({ data: NRIC , UUID: UUID}),
             headers: {
               "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, OPTION"
             },
           };
           //Return error
@@ -103,6 +106,9 @@ exports.handler = async (event) => {
           body: JSON.stringify({ data: e }),
           headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, OPTION"
           }, 
         }; 
 
