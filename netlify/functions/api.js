@@ -18,7 +18,7 @@ exports.handler = async (event) => {
     REACT_APP_JWTTOKENURL="https://stg-id.singpass.gov.sg"
     REACT_APP_SPTOKENURL="https://stg-id.singpass.gov.sg/token"
     REACT_APP_KID="testing123"
-    REACT_APP_REDIRECT_URI="https://singpassdemoapp.netlify.app/callback"     
+    REACT_APP_REDIRECT_URI="https://spdemoapp.netlify.app/callback"     
        const code =event.queryStringParameters.code;
         const jose = require("jose");
         const moment = require("moment");
