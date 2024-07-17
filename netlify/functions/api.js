@@ -14,7 +14,7 @@ exports.handler = async (event) => {
           x: "0GR5oBa1FINjCZP_W-nR8Yqoz4E_9j7lgCuRPh9PZTA",
           y: "0leGfxdQSJdtubopqhj5uhPVYV3LSd_yf3y2DdRD5No"
         }
-    REACT_APP_CLIENT_ID="tLRDBkf1CNy5Rsi34mEKuOD5EpQAwjIq"
+    REACT_APP_CLIENT_ID="sRqX0QNPOkRX11Czq7zFyLBNhVUYGXvp"
     REACT_APP_JWTTOKENURL="https://stg-id.singpass.gov.sg"
     REACT_APP_SPTOKENURL="https://stg-id.singpass.gov.sg/token"
     REACT_APP_KID="testing123"
